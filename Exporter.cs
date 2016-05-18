@@ -11,6 +11,8 @@ namespace VisioExportPagesToDocs
 
         public Exporter(ExporterSettings settings)
         {
+            Log = new List<LogRecord>();
+
             if (settings == null)
             {
                 throw new System.ArgumentNullException();
@@ -26,14 +28,14 @@ namespace VisioExportPagesToDocs
                 throw new System.ArgumentNullException();
             }
 
+            this.Settings = settings;
+
             if (!System.IO.Directory.Exists(this.Settings.DestinationPath))
             {
                 throw new System.ArgumentException(string.Format("destination path does not exist: \"{0}\"", this.Settings.DestinationPath));
             }
 
             string input_filname = settings.InputDocument.Name;
-
-            this.Settings = settings;
             
             this.Settings.BaseName = this.Settings.BaseName ?? System.IO.Path.GetFileNameWithoutExtension(input_filname);
             this.Settings.InputExtension = System.IO.Path.GetExtension(input_filname);
