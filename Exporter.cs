@@ -67,28 +67,23 @@ namespace VisioExportPagesToDocs
                 string destname = System.IO.Path.Combine( this.Settings.DestinationPath, basename);
 
                 var rec = new LogRecord();
-                rec.OutputFileAlreadyExisted = System.IO.File.Exists(destname);
+                rec.OutputFileAlreadyExists = System.IO.File.Exists(destname);
                 rec.OutputFilename = destname;
                 rec.Settings = this.Settings;
                 rec.PageIndex = pageindex;
                 rec.PageName = pagename;
 
-                bool perform_save = false;
-                if (this.Settings.Overwrite)
-                {
-                    perform_save = true;
-                    if (rec.OutputFileAlreadyExisted)
-                    {
-                        System.IO.File.Delete(destname);
-                    }                    
-                }
-                else
-                {
-                    perform_save = !rec.OutputFileAlreadyExisted;
-                }
-
+                // Perform a save if the output file doesn't exist or the settings force an overwrite
+                bool perform_save = this.Settings.Overwrite || !rec.OutputFileAlreadyExists;
+                
                 if (perform_save)
                 {
+                    if (this.Settings.Overwrite && rec.OutputFileAlreadyExists)
+                    {
+                        // the output file exists and we are instructed to overwrite it so try to delete it
+                        System.IO.File.Delete(destname);
+                    }
+
                     var activewindow = app.ActiveWindow;
                     activewindow.ViewFit = (int)Microsoft.Office.Interop.Visio.VisWindowFit.visFitPage;
                     newdoc.SaveAs(destname);

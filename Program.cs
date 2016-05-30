@@ -37,11 +37,11 @@ namespace VisioExportPagesToDocs
                 foreach (var rec in exporter.Run())
                 {
                     Console.WriteLine();
-                    Console.WriteLine("Page Index : {0}", rec.PageIndex);
-                    Console.WriteLine("Page Name : {0}", rec.PageName);
-                    Console.WriteLine("Output Document : {0}", rec.OutputFilename);
-                    Console.WriteLine("Output Document already existed : {0}", rec.OutputFileAlreadyExisted);
-                    Console.WriteLine("Wrote output file: {0}", rec.OutputFileWritten);
+                    Console.WriteLine("Page Index: {0}", rec.PageIndex);
+                    Console.WriteLine("Page Name: {0}", rec.PageName);
+                    Console.WriteLine("Output document: {0}", rec.OutputFilename);
+                    Console.WriteLine("Output document already exists: {0}", rec.OutputFileAlreadyExists);
+                    Console.WriteLine("Wrote output document: {0}", rec.OutputFileWritten);
                 }
 
             }

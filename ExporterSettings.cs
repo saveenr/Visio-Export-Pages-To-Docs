@@ -15,16 +15,4 @@ namespace VisioExportPagesToDocs
             this.Overwrite = false;
         }
     }
-
-
-    public class LogRecord
-    {
-        public ExporterSettings Settings;
-        public string PageName;
-        public int PageIndex;
-        public string OutputFilename;
-        public bool OutputFileAlreadyExisted;
-        public bool OutputFileWritten;
-    }
-
 }
